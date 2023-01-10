@@ -1,14 +1,15 @@
 # ToDo-App Phase 1
-A front-end application that involves API utilization.
+A front-end application that involves using React Context to adjust functionality and dynamically insert variables. Buld out credit goes to instructor Ryan
 
 ## Project Outline
-Phase 1 consists of basic React set up and implementation of starter code. Furthermore, 
+Phase 1 consists of basic React set up and implementation of starter code. Furthermore, the build out would include a modularized and stylized List feature, as well as usage of pagination to replicate the final product as captured in Lab.
 
 ## Features
 - React
-- Mantine Component API
+- Mantine & Pagination Component API
 - CSS Implementation
 - Context API
+- List Feature
 
 ## Deployment Link
 [Lab 31 Deployment]()
