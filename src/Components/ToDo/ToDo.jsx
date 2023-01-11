@@ -2,9 +2,25 @@ import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/form.js';
 import { v4 as uuid } from 'uuid';
 import { List } from '../List/List'
+import { createStyles, Grid, Card, TextInput, Slider, Button, Text } from '@mantine/core';
+
+const useStyles = createStyles((theme) => ({
+  h1: {
+    backgroundColor: theme.colors.gray[8],
+    color: theme.colors.gray[0],
+    fontSize: theme.fontSizes.lg,
+    width: '80%',
+    margin: 'auto',
+    padding: theme.spacing.md,
+    marginBottom: theme.spacing.md,
+    marginTop: theme.spacing.md,
+  }
+}));
+
 
 const ToDo = () => {
-  
+  const { classes } = useStyles();
+
   const [defaultValues] = useState({
     difficulty: 4,
   });
@@ -26,18 +42,18 @@ const ToDo = () => {
     // linter will want 'incomplete' added to dependency array unnecessarily. 
     // disable code used to avoid linter warning 
     // eslint-disable-next-line react-hooks/exhaustive-deps 
-  }, [list]);  
+  }, [list]);
 
   function deleteItem(id) {
-    const items = list.filter( item => item.id !== id );
+    const items = list.filter(item => item.id !== id);
     setList(items);
   }
 
   function toggleComplete(id) {
 
-    const items = list.map( item => {
-      if ( item.id === id ) {
-        item.complete = ! item.complete;
+    const items = list.map(item => {
+      if (item.id === id) {
+        item.complete = !item.complete;
       }
       return item;
     });
@@ -49,35 +65,48 @@ const ToDo = () => {
   return (
     <>
       <header data-testid="todo-header">
-        <h1 data-testid="todo-h1">To Do List: {incomplete} items pending</h1>
+        <h1 data-testid="todo-h1" className={classes.h1}>To Do List: {incomplete} items pending</h1>
       </header>
 
-      <form onSubmit={handleSubmit}>
+      <Grid style={{ widith: '80%', margin: 'auto' }}>
+        <Grid.Col xs={12} sm={4}>
+          <Card withBorder>
+            <form onSubmit={handleSubmit}>
 
-        <h2>Add To Do Item</h2>
+              <h2>Add To Do Item</h2>
 
-        <label>
-          <span>To Do Item</span>
-          <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
-        </label>
+              <TextInput
+                name="text"
+                placeholder={"Item Details"}
+                onChange={handleChange}
+                label="To Do Item"
+              />
 
-        <label>
-          <span>Assigned To</span>
-          <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
-        </label>
+              <TextInput
+                name="assigneee"
+                placeholder={"Assignee Name"}
+                onChange={handleChange}
+                label="Assigned To"
+              />
 
-        <label>
-          <span>Difficulty</span>
-          <input onChange={handleChange} defaultValue={defaultValues.difficulty} type="range" min={1} max={5} name="difficulty" />
-        </label>
+              <Text>Difficulty</Text>
+              <Slider
+                name="Difficulty"
+                onChange={handleChange}
+                min={1}
+                max={5}
+                step={1}
+                defaultValue={defaultValues.difficulty}
+              />
 
-        <label>
-          <button type="submit">Add Item</button>
-        </label>
-      </form>
-
-      <List list={list}/>
-
+              <Button type="submit">Add Item</Button>
+            </form>
+          </Card>
+        </Grid.Col>
+        <Grid.Col xs={12} sm={4}>
+          <List list={list} toggleComplete={toggleComplete} />
+        </Grid.Col>
+      </Grid>
     </>
   );
 };
