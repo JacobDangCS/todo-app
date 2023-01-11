@@ -1,7 +1,7 @@
 import { Pagination } from "@mantine/core";
 import { useContext, useState } from 'react'
 import { SettingsContext } from '../../Context/Settings';
-
+import { When } from 'react-if';
 
 // const useStyles = createStyles((theme) => {
 // //Create Stylization of To Do cards
@@ -35,7 +35,10 @@ const List = ({list, toggleComplete}) => {
             </div>
           ))}
 
-        <Pagination page={page} onChange={setPage} total={pageCount}/>  
+        <When condition ={listToRender.length > 0}>
+
+        <Pagination page={page} onChange={setPage} total={pageCount}/>
+        </When>  
         </>
     )
 }
