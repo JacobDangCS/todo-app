@@ -36,3 +36,23 @@ Phase 2 consists of implementing the Context API further and provide a form that
 
 ## UML
 [Lab32 UML](./assets/Lab32-image.png)
+
+
+# ToDo-App Phase 3
+A front-end application that extends and expands on Phase 1 & 2. This phase involves building out auth & RBAC functionality as well as mimicking functions from the final product demonstrated throughout the week.
+
+## Project Outline
+Phase 3 consists of refactoring given code to have it applicable to the application. It also consists of adding additional features such as the Login button, unit tests, as well as giving extended implementations to functions involving the auth and CRUD features.
+
+## Features
+- RBAC functionality
+- CRUD functionality
+- Auth capabilities
+- Login & Logout features
+
+
+## Deployment Link
+[Lab 33 Deployment]()
+
+## UML
+[Lab33 UML](./assets/Lab33-image.png)
