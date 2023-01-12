@@ -15,6 +15,7 @@ const useStyles = createStyles((theme) => ({
 
 const Header = () => {
     const { classes } = useStyles();
+
     return (
         <Header>
             <Group>
