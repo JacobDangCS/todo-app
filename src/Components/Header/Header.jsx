@@ -1,5 +1,6 @@
 import { Text, createStyles, Group } from "@mantine/core";
 import { Link } from 'react-router-dom';
+import { Login } from '../Login/Login'
 
 const useStyles = createStyles((theme) => ({
     header: {
@@ -18,9 +19,12 @@ const Header = () => {
 
     return (
         <Header>
+            <Group position='apart'>
             <Group>
                 <Link to="/" className={classes.link}></Link>
                 <Link to="/settings" className={classes.link}></Link>
+            </Group>
+            <Login/>
             </Group>
             <header className={classes.header}>
                 <Text>Home</Text>

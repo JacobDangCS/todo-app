@@ -11,9 +11,6 @@ Phase 1 consists of basic React set up and implementation of starter code. Furth
 - Context API
 - List Feature
 
-## Deployment Link
-[Lab 31 Deployment]()
-
 ## UML
 [Lab31 UML](./assets/Lab31-image.png)
 
@@ -31,8 +28,6 @@ Phase 2 consists of implementing the Context API further and provide a form that
 - List Feature
 - Settings Feature
 
-## Deployment Link
-[Lab 32 Deployment]()
 
 ## UML
 [Lab32 UML](./assets/Lab32-image.png)
@@ -56,3 +51,13 @@ Phase 3 consists of refactoring given code to have it applicable to the applicat
 
 ## UML
 [Lab33 UML](./assets/Lab33-image.png)
+
+
+# ToDo-App Phase 4
+As the final touch to the application, Auth, CRUD functionality Login/Login inputs will be accessible through an API.
+
+## Project Outline
+Phase 4 consists of implementing auth and login features and functionality
+
+## Features
+- API implementation
