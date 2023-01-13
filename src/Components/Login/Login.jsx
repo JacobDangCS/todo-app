@@ -1,13 +1,16 @@
 import { AuthContext } from "../../context/Auth/Auth";
 import { useContext, useState } from 'react';
+import { Button, TextInput, Group } from '@mantine/core'
+import { If, Then, Else } from 'react-if';
 //import { SettingsContext } from "../../context/Settings/Settings";
 
 const Login = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const { login, user, logout } = useContext(AuthContext);
+    const { login, logout, isLoggedIn } = useContext(AuthContext);
     //const { addStaff } = useContext(SettingsContext);
+
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -15,24 +18,32 @@ const Login = () => {
     };
 
     const handleLogout = (e) => {
-        e.preventDefault();
         setUsername('');
         setPassword('');
+        logout();
     };
 
 
     return (
         <>
-            <form onSubmit={handleLogin}>
-                <label> Username:
-                    <input onChange={(e) => setUsername(e.target.value)} />
-                </label>
-                <label> Password:
-                    <input onChange={(e) => setPassword(e.target.value)} />
-                    <button type="submit">Login</button>
-                </label>
-            </form>
-            <button onClick={{handleLogout}}>Logout</button>
+            <If condition={isLoggedIn}>
+                <Then>
+                    <Button color="red.6" onClick={handleLogout}>Log Out</Button>
+                </Then>
+                <Else>
+                    <Group>
+                    <TextInput
+                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Username"
+                    />
+                    <TextInput
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                    />
+                    <Button color="gray.8" onClick={() => login(handleLogin)}>Login</Button>
+                    </Group>
+                </Else>
+            </If>
         </>
     )
 };
