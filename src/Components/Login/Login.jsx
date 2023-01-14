@@ -2,14 +2,12 @@ import { AuthContext } from "../../context/Auth/Auth";
 import { useContext, useState } from 'react';
 import { Button, TextInput, Group } from '@mantine/core'
 import { If, Then, Else } from 'react-if';
-//import { SettingsContext } from "../../context/Settings/Settings";
 
 const Login = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const { login, logout, isLoggedIn } = useContext(AuthContext);
-    //const { addStaff } = useContext(SettingsContext);
 
 
     const handleLogin = (e) => {

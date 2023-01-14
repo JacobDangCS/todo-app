@@ -1,6 +1,6 @@
 import { Text, createStyles, Group } from "@mantine/core";
 import { Link } from 'react-router-dom';
-import { Login } from '../Login/Login'
+import Login from '../Login/Login'
 
 const useStyles = createStyles((theme) => ({
     header: {
