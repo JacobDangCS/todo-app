@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/form.js';
 import { v4 as uuid } from 'uuid';
-import { List } from '../List/List'
+import List from '../List/List';
 import { createStyles, Grid, Card, TextInput, Slider, Button, Text } from '@mantine/core';
+import Auth from '../Auth/Auth';
+import axios from 'axios';
 
 const useStyles = createStyles((theme) => ({
   h1: {
@@ -28,11 +30,17 @@ const ToDo = () => {
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
-  function addItem(item) {
-    item.id = uuid();
+  async function addItem(item) {
     item.complete = false;
     console.log(item);
-    setList([...list, item]);
+    const config = {
+      url: '/todo',
+      baseURL: 'https://api-js401.herokuapp.com/api/v1',
+      method: 'post',
+      data: {item}
+    }
+    const res = await axios(config)
+    setList([...list, res.data]);
   }
 
   useEffect(() => {
@@ -44,22 +52,48 @@ const ToDo = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [list]);
 
-  function deleteItem(id) {
-    const items = list.filter(item => item.id !== id);
-    setList(items);
+  useEffect(() => {
+    (async () => {
+      const config = {
+        url: '/todo',
+        baseURL: 'https://api-js401.herokuapp.com/api/v1',
+        method: 'get',
+      }
+      let res = await axios(config);
+      setList(res.data.results);
+    })()
+  }, []);
+
+  async function deleteItem(id) {
+    const config = {
+      url: `/todo/${id}`,
+      baseURL: 'https://api-js401.herokuapp.com/api/v1',
+      method: 'delete'
+    }
+    const res = await axios(config);
+    getList();
   }
 
-  function toggleComplete(id) {
+  async function toggleComplete(item) {
+    const complete = !item.complete
+    const config = {
+      url: `/todo/${item._id}`,
+      baseURL: 'https://api-js401.herokuapp.com/api/v1',
+      method: 'put',
+      data: { ...item, complete }
+    }
+    const res = await axios(config);
+    getList();
+  }
 
-    const items = list.map(item => {
-      if (item.id === id) {
-        item.complete = !item.complete;
-      }
-      return item;
-    });
-
-    setList(items);
-
+  async function getList() {
+    const config = {
+      url: '/todo',
+      baseURL: 'https://api-js401.herokuapp.com/api/v1',
+      method: 'get',
+    }
+    let res = await axios(config);
+    setList(res.data.results)
   }
 
   return (
@@ -69,43 +103,49 @@ const ToDo = () => {
       </header>
 
       <Grid style={{ widith: '80%', margin: 'auto' }}>
-        <Grid.Col xs={12} sm={4}>
-          <Card withBorder>
-            <form onSubmit={handleSubmit}>
+        <Auth capability="create">
+          <Grid.Col xs={12} sm={4}>
+            <Card withBorder>
+              <form onSubmit={handleSubmit}>
 
-              <h2>Add To Do Item</h2>
+                <h2>Add To Do Item</h2>
 
-              <TextInput
-                name="text"
-                placeholder={"Item Details"}
-                onChange={handleChange}
-                label="To Do Item"
-              />
+                <TextInput
+                  name="text"
+                  placeholder={"Item Details"}
+                  onChange={handleChange}
+                  label="To Do Item"
+                />
 
-              <TextInput
-                name="assigneee"
-                placeholder={"Assignee Name"}
-                onChange={handleChange}
-                label="Assigned To"
-              />
+                <TextInput
+                  name="assigneee"
+                  placeholder={"Assignee Name"}
+                  onChange={handleChange}
+                  label="Assigned To"
+                />
 
-              <Text>Difficulty</Text>
-              <Slider
-                name="Difficulty"
-                onChange={handleChange}
-                min={1}
-                max={5}
-                step={1}
-                defaultValue={defaultValues.difficulty}
-              />
+                <Text>Difficulty</Text>
+                <Slider
+                  name="Difficulty"
+                  onChange={handleChange}
+                  min={1}
+                  max={5}
+                  step={1}
+                  defaultValue={defaultValues.difficulty}
+                />
 
-              <Button type="submit">Add Item</Button>
-            </form>
-          </Card>
-        </Grid.Col>
-        <Grid.Col xs={12} sm={4}>
-          <List list={list} toggleComplete={toggleComplete} />
-        </Grid.Col>
+                <Button type="submit">Add Item</Button>
+              </form>
+            </Card>
+          </Grid.Col>
+        </Auth>
+        <Auth capability="read">
+          <Grid.Col xs={12} sm={4}>
+            <List list={list} 
+            toggleComplete={toggleComplete} 
+            deleteItem={deleteItem}/>
+          </Grid.Col>
+        </Auth>
       </Grid>
     </>
   );

@@ -61,3 +61,6 @@ Phase 4 consists of implementing auth and login features and functionality
 
 ## Features
 - API implementation
+
+## Credits
+Code Demo was referrenced from Instructor Ryan

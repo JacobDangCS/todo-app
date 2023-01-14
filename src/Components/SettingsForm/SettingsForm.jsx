@@ -2,6 +2,7 @@ import { SettingsContext } from '../../context/Settings/Settings';
 import { useContext, useState } from 'react';
 import { Card, createStyles, Grid, Switch, Text, NumberInput, TextInput, Button } from '@mantine/core';
 import { IconSettings } from '@tabler/icons';
+import { When } from 'react-if';
 
 const useStyles = createStyles((theme) => ({
     h1: {
@@ -56,11 +57,16 @@ const SettingsForm = () => {
                     </Card>
                 </Grid.Col>
                 <Grid.Col xs={12} sm={6}>
-                    <Card>
-                        <Card.Section>
-                            <Text>Shows the new settings from Button</Text>
-                        </Card.Section>
-                    </Card>
+                    <When condition={show}>
+                        <Card withBorder p="sm">
+                            <Card.Section>
+                                <Text m="xl" fontSize="xl" weight="bold">Updated Settings</Text>
+                            </Card.Section>
+                            <Text m="sm">{showComplete ? 'Show' : 'Hide'}Completed ToDos</Text>
+                            <Text m="sm">Items Per Page {pageItems}</Text>
+                            <Text m="sm">Sort Keyword: {sort}</Text>
+                        </Card>
+                    </When>
                 </Grid.Col>
             </Grid>
         </>
