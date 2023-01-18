@@ -31,16 +31,20 @@ const ToDo = () => {
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   async function addItem(item) {
-    item.complete = false;
-    console.log(item);
-    const config = {
-      url: '/todo',
-      baseURL: 'https://api-js401.herokuapp.com/api/v1',
-      method: 'post',
-      data: {item}
+    if(item.text){
+      item.complete = false;
+      console.log('ADD ITEM', item);
+      const config = {
+        url: '/todo',
+        baseURL: 'https://api-js401.herokuapp.com/api/v1',
+        method: 'post',
+        data: item
+      }
+      const res = await axios(config)
+      setList([...list, res.data]);
+    } else {
+      console.warn('ITEM TEXT NOT PRESENT');
     }
-    const res = await axios(config)
-    setList([...list, res.data]);
   }
 
   useEffect(() => {

@@ -15,10 +15,10 @@ const useStyles = createStyles((theme) => ({
 }))
 
 const Header = () => {
-    const { classes } = useStyles();
+    const classes = useStyles();
 
     return (
-        <Header>
+        <>
             <Group position='apart'>
             <Group>
                 <Link to="/" className={classes.link}></Link>
@@ -29,7 +29,7 @@ const Header = () => {
             <header className={classes.header}>
                 <Text>Home</Text>
             </header>
-        </Header>
+        </>
     )
 };
 
