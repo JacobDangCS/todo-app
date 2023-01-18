@@ -47,7 +47,7 @@ Phase 3 consists of refactoring given code to have it applicable to the applicat
 
 
 ## Deployment Link
-[Lab 33 Deployment]()
+[Lab 33 Deployment](https://63c74df9eb5c307383008436--zingy-sawine-d6800e.netlify.app/)
 
 ## UML
 [Lab33 UML](./assets/Lab33-image.png)
@@ -61,6 +61,10 @@ Phase 4 consists of implementing auth and login features and functionality
 
 ## Features
 - API implementation
+
+
+## Deployment Link
+[Lab 34 Deployment](https://63c74df9eb5c307383008436--zingy-sawine-d6800e.netlify.app/)
 
 ## Credits
 Code Demo was referrenced from Instructor Ryan
