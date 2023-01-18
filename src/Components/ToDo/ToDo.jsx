@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import useForm from '../../hooks/form.js';
-import { v4 as uuid } from 'uuid';
 import List from '../List/List';
 import { createStyles, Grid, Card, TextInput, Slider, Button, Text } from '@mantine/core';
 import Auth from '../Auth/Auth';
@@ -31,7 +30,7 @@ const ToDo = () => {
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
   async function addItem(item) {
-    if(item.text){
+    if (item.text) {
       item.complete = false;
       console.log('ADD ITEM', item);
       const config = {
@@ -74,7 +73,7 @@ const ToDo = () => {
       baseURL: 'https://api-js401.herokuapp.com/api/v1',
       method: 'delete'
     }
-    const res = await axios(config);
+    await axios(config);
     getList();
   }
 
@@ -86,7 +85,7 @@ const ToDo = () => {
       method: 'put',
       data: { ...item, complete }
     }
-    const res = await axios(config);
+    await axios(config);
     getList();
   }
 
@@ -145,9 +144,9 @@ const ToDo = () => {
         </Auth>
         <Auth capability="read">
           <Grid.Col xs={12} sm={4}>
-            <List list={list} 
-            toggleComplete={toggleComplete} 
-            deleteItem={deleteItem}/>
+            <List list={list}
+              toggleComplete={toggleComplete}
+              deleteItem={deleteItem} />
           </Grid.Col>
         </Auth>
       </Grid>

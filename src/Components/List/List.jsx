@@ -12,7 +12,7 @@ const List = ({ list, toggleComplete, deleteItem }) => {
 
   const { pageItems, showComplete } = useContext(SettingsContext);
   const [page, setPage] = useState(1);
-  const { can, isLoggedIn } = useContext(AuthContext);
+  const { can } = useContext(AuthContext);
 
   const listToRender = showComplete ? list : list.fitler(item => !item.complete);
 
