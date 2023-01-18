@@ -1,6 +1,6 @@
 import { Badge, Card, CloseButton, Group, Pagination, Text } from "@mantine/core";
 import { useContext, useState } from 'react'
-import SettingsContext from '../../context/Settings/Settings';
+import { SettingsContext } from '../../context/Settings/Settings';
 import { If, Then, When, Else } from 'react-if';
 import { AuthContext } from "../../context/Auth/Auth";
 
@@ -27,12 +27,12 @@ const List = ({ list, toggleComplete, deleteItem }) => {
   return (
     <>
       {displayList.map(item => (
-        <Card key={item.id} withBorder shadow="medium" mb="sm">
+        <Card key={item._id} withBorder shadow="medium" mb="sm">
           <Card.Section withBorder shadow="medium">
             <Group>
               <CloseButton
                 title="Close ToDo Item"
-                onClick={() => deleteItem(item.id)}
+                onClick={() => deleteItem(item._id)}
               />
               <If condition={can('update')}>
                 <Then>

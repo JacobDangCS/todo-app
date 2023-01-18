@@ -12,7 +12,6 @@ export default function App() {
   const { isLoggedIn } = useContext(AuthContext);
 
   return (
-    <>
       <BrowserRouter>
         <Header />
         <When condition={isLoggedIn}>
@@ -22,9 +21,7 @@ export default function App() {
           </Routes>
         </When>
 
-        <Auth capability="read">
-          <p>I can READ</p>
-        </Auth>
+        <Auth capability="read" children={<p>I can READ</p>} />
 
         <Auth capability="create">
           <p>I can CREATE</p>
@@ -40,6 +37,5 @@ export default function App() {
 
         <Footer/>
       </BrowserRouter>
-    </>
   );
 }

@@ -11,7 +11,7 @@ root.render(
     <MantineProvider withGlobalStyles with NormalizeCSS>
       <AuthProvider>
         <SettingsProvider>
-          <App />
+         <App />
         </SettingsProvider>
       </AuthProvider>
     </MantineProvider>

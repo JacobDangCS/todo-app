@@ -8,7 +8,7 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const { login, logout, isLoggedIn } = useContext(AuthContext);
-
+    console.log(username, password);
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -38,7 +38,7 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Password"
                     />
-                    <Button color="gray.8" onClick={() => login(handleLogin)}>Login</Button>
+                    <Button color="gray.8" onClick={handleLogin}>Login</Button>
                     </Group>
                 </Else>
             </If>
